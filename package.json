@@ -1,0 +1,32 @@
+{
+  "name": "project",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build --root /home/devbox/project",
+    "preview": "wrangler pages dev ./dist",
+    "deploy": "astro build --root /home/devbox/project && wrangler pages deploy ./dist",
+    "astro": "astro",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^12.2.1",
+    "@astrojs/vue": "^5.0.7",
+    "@sentry/node": "^9.1.0",
+    "@types/stripe": "^8.0.416",
+    "@vue/runtime-dom": "^3.5.13",
+    "astro": "^5.0.0",
+    "stripe": "^17.6.0",
+    "typescript": "^5.6.3",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "@types/node": "^22.13.5",
+    "vitest": "^1.6.1"
+  }
+}

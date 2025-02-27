@@ -1,0 +1,73 @@
+name = "crosec"
+main = "./src/worker.js"
+compatibility_date = "2024-03-01"
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "npm run build"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "d9c9246b960f4fe99827d7101d815c90"
+
+[env.production]
+[env.production.vars]
+ENVIRONMENT = "production"
+SENTRY_DSN = "https://2b099a6e704f71d6daa6344d748a30c3@o4508860732276736.ingest.us.sentry.io/4508860758491136"
+CUSTOMS_API_KEY = "${CUSTOMS_API_KEY}"
+name = "production"
+zone_id = "8fc9b44b1bdf7609bc06f3f09acaf675"
+routes = ["crosec.518004.com/*"]
+
+[env.development]
+[env.development.vars]
+ENVIRONMENT = "development"
+SENTRY_DSN = "https://2b099a6e704f71d6daa6344d748a30c3@o4508860732276736.ingest.us.sentry.io/4508860758491136"
+CUSTOMS_API_KEY = "4b0S9gUrzfpB9cwSGyrZD3MH98sT5VOSpuyu6rx6"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ecommerce"
+database_id = "39d9d74e-f14a-46fc-888d-1ac9714cf6e8"
+
+[vars]
+OPEN_EXCHANGE_RATES_KEY = "${OPEN_EXCHANGE_KEY}"
+STRIPE_SECRET_KEY = "${STRIPE_SECRET}"
+WECHAT_MCH_ID = "${WECHAT_MCH_ID}"
+ALIPAY_APP_ID = "${ALIPAY_APP_ID}"
+ERP_1688_TOKEN = "${ERP_1688_TOKEN}"
+DEFAULT_CURRENCY = "USD"
+
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js"]
+
+# 删除旧的规则格式
+# [build.upload]
+# format = "service-worker"
+# rules = [
+#   { type = "ESModule", globs = ["**/*.js"] }
+# ] 
+
+[[headers]]
+for = "/*"
+[headers.values]
+"Content-Security-Policy" = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' *;"
+"X-Content-Type-Options" = "nosniff"
+"Access-Control-Allow-Origin" = "*"
+"Access-Control-Allow-Methods" = "GET, POST, PUT, DELETE, OPTIONS"
+"Access-Control-Allow-Headers" = "Content-Type, Authorization"
+
+# 使用更通用的模式匹配所有 JS 文件
+[[headers]]
+for = "**/*.js"
+[headers.values]
+"Content-Type" = "application/javascript; charset=utf-8"
+
+# 使用更通用的模式匹配所有 CSS 文件
+[[headers]]
+for = "**/*.css"
+[headers.values]
+"Content-Type" = "text/css; charset=utf-8" 

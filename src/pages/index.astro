@@ -1,0 +1,57 @@
+---
+// 这是 Astro 的前端部分
+import ProductCatalog from '../components/ProductCatalog.vue';
+import ShoppingCart from '../components/ShoppingCart.vue';
+import OrderTracking from '../components/OrderTracking.vue';
+import ERPManagement from '../components/ERPManagement.vue';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <header>
+    <h1>ZheTai Global Mall</h1>
+  </header>
+  <main>
+    <div class="app-container">
+      <div class="main-content">
+        <ProductCatalog client:load />
+        <ShoppingCart client:load />
+      </div>
+      <div class="sidebar">
+        <OrderTracking client:load />
+        <ERPManagement client:load />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .main-content, .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .app-container {
+      flex-direction: row;
+    }
+    
+    .main-content {
+      flex: 2;
+    }
+    
+    .sidebar {
+      flex: 1;
+    }
+  }
+</style> 
